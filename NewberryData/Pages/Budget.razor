@@ -1,13 +1,11 @@
 @page "/budget"
 
-@using NewberryData.Data
-@inject WeatherForecastService ForecastService
+@using NewberryData.Services.Interfaces
+@inject IBudgetReport reportService
 
-<h1>Weather forecast</h1>
+<h1>Newberry Budget Report</h1>
 
-<p>This component demonstrates fetching data from a service.</p>
-
-@if (forecasts == null)
+@if (reportService == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -16,20 +14,26 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Id</th>
+                <th>Line Identifier</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Category Number</th>
+                <th>Amount</th>
+                <th>Year</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var lineItem in reportData.Data)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@lineItem.Id</td>
+                    <td>@lineItem.LineIdentifier</td>
+                    <td>@lineItem.Name</td>
+                    <td>@lineItem.Category</td>
+                    <td>@lineItem.CategoryNumber</td>
+                    <td>@lineItem.Amount</td>
+                    <td>@lineItem.Year</td>
                 </tr>
             }
         </tbody>
@@ -37,10 +41,14 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    private ReportResponse reportData;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        reportData = await reportService.GetLineItemsAsync(new ReportRequest()
+        {
+            Category = "",
+            Year = "2020"
+        });
     }
 }

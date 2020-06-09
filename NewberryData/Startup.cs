@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NewberryData.Data;
+using NewberryData.Services;
+using NewberryData.Services.Interfaces;
+using NewberryData.Services.Report;
 
 namespace NewberryData
 {
@@ -28,6 +30,7 @@ namespace NewberryData
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddSingleton<IBudgetReport, BudgetReportService>();
             services.AddSingleton<WeatherForecastService>();
         }
 

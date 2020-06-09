@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using NewberryData.Data;
 
-namespace NewberryData.Data
+namespace NewberryData.Services
 {
     public class WeatherForecastService
     {
@@ -22,5 +23,5 @@ namespace NewberryData.Data
             }).ToArray());
         }
     }
-    
+
 }

@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "${workspaceFolder:NewberryData}/NewberryData/Data/Database/newberry_budget.db",
+            "driver": "SQLite",
+            "group": "Default",
+            "name": "NewberryBudget",
+            "previewLimit": 50
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
