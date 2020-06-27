@@ -11,3 +11,10 @@ public class ReportResponse
 {
     public IEnumerable<LineItem> Data { get; set; }
 }
+
+public class BudgetRequest
+{
+    public string FiscalYear { get;set;}
+    public string ReveneCode { get;set;}
+    public string Description { get;set;}
+}
