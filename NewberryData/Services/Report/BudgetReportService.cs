@@ -7,23 +7,7 @@ using NewberryData.Data;
 using NewberryData.Services.Interfaces;
 
 namespace NewberryData.Services.Report
-{
-    public class RevenueProposalService : IBudgetReport
-    {
-        private const string DefaultConnectionName = "DefaultConnection";
-
-        private IDbConnection connection;
-
-        public BudgetReportService(IConfiguration configuration)
-        {
-            connection = new SQLiteConnection(configuration[DefaultConnectionName]);
-            connection.Open();
-        }
-        public Task<ReportResponse> GetLineItemsAsync(ReportRequest request)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
+{    
     public class BudgetReportService : IBudgetReport
     {
         private const string DefaultConnectionName = "DefaultConnection";

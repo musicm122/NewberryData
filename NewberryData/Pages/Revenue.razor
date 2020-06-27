@@ -1,0 +1,50 @@
+@page "/revenue"
+
+@using System.Collections.Generic
+@using BlazorTable
+@using System.Linq
+@using NewberryData.Data
+@using NewberryData.Services.Interfaces
+@inject IRevenueReport reportService
+
+<h1>Newberry Revenue Report</h1>
+
+
+@if (reportService == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+    <Table TableItem="RevenueProposal" Items="Data" PageSize="15">
+
+        <Column TableItem="RevenueProposal" Title="﻿FiscalYear" Field="@(x=>x.﻿FiscalYear)" Sortable="true" Filterable="true" />
+        <Column TableItem="RevenueProposal" Title="﻿RevenueCode" Field="@(x=>x.﻿RevenueCode)" Sortable="true" Filterable="true" />
+        <Column TableItem="RevenueProposal" Title="Description" Field="@(x=>x.Description)" Sortable="true" Filterable="true" Width="30%" />
+        <Column TableItem="RevenueProposal" Title="Income" Field="@(x=>x.Income)" Sortable="true" Filterable="true" Format="C" Align="Align.Right" />
+        <Column TableItem="RevenueProposal" Title="Budget" Field="@(x=>x.Budget)" Sortable="true" Filterable="true" Format="C" Align="Align.Right" />
+        <Column TableItem="RevenueProposal" Title="Projected" Field="@(x=>x.Projected)" Sortable="true" Filterable="true" Format="C" Align="Align.Right" />
+        <Column TableItem="RevenueProposal" Title="Proposed" Field="@(x=>x.Proposed)" Sortable="true" Filterable="true" Format="C" Align="Align.Right" />
+        <Column TableItem="RevenueProposal" Title="﻿ProjectedFiscalYear" Field="@(x=>x.﻿ProjectedFiscalYear)" Sortable="true" Filterable="true" />
+
+        <Pager ShowPageNumber="true" ShowTotalCount="true" />
+    </Table>
+}
+
+@code {
+    private RevenueReportResponse reportData;
+
+    private RevenueProposal[] Data;
+
+    protected override async Task OnInitializedAsync()
+    {
+        reportData = await reportService.GetAllIncomeItemAsync();
+        Data = reportData.Data.ToArray();
+    }
+
+    public void OnSubmit()
+    {
+
+    }
+}

@@ -31,6 +31,7 @@ namespace NewberryData
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<IBudgetReport, BudgetReportService>();
+            services.AddSingleton<IRevenueReport, RevenueProposalService>();
             services.AddSingleton<WeatherForecastService>();
         }
 
